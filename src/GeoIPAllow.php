@@ -445,7 +445,7 @@ Deny from All
 Allow from env=allowbot
 
 ## Private IP Address
-Allow from localhost
+Allow from 127.0.0.1
 Allow from 10.0.0.0/8
 Allow from 172.16.0.0/12
 Allow from 192.168.0.0/16
@@ -465,7 +465,7 @@ map \$http_user_agent \$allow_bot {
 }
 
 ## Private IP Address
-allow localhost;
+allow 127.0.0.1;
 allow 10.0.0.0/8;
 allow 172.16.0.0/12;
 allow 192.168.0.0/16;
