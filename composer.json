@@ -1,0 +1,28 @@
+{
+    "name": "kaleidpixel/geoipallow",
+    "description": "A streamlined tool designed to generate .htaccess configurations, allowing web access exclusively from IP addresses of a specified country. Enhance your site's security and target your audience more effectively.",
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "k4zuki02h4t4",
+            "email": "7222225+k4zuki02h4t4@users.noreply.github.com",
+            "homepage": "https://www.kaleidpixel.jp",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3||^8.0",
+        "ext-intl": "*",
+        "ext-mbstring": "*",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-fileinfo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "kaleidpixel\\": "src/"
+        }
+    }
+}
