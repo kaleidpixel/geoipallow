@@ -20,23 +20,61 @@ Coding is quite simple. The options are only simple, so you won't get lost.
 
 ## Methods
 
-|                 Method | Parameter                                                                                      | Description                                                                               |
-|-----------------------:|:-----------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------|
-|             **read()** | bool $echo = false<br>bool $force = false                                                      | Create a list of IP addresses. If already created, cache it for one day.                  |
-|           **delete()** | none                                                                                           | Delete the IP address added with the read method.                                                     |
-|  **ipListEndPoints()** | none                                                                                           | Wrapper method for the constant IP_LIST_ENDPOINTS.                                        |
-| **getCIDRRangeIPv4()** | int $range = 0                                                                                 | Calculate CIDR.                                                                           |
-|           **is_cli()** | none                                                                                           | Check if the type of interface between the web server and PHP is CLI.                     |
-| **curl_get_content()** | string $url = ''<br>array $header = []<br>string $method = 'GET'<br>array $data = []           | Retrieve the HTTP code and content of the specified URL.                                  |
-|         **download()** | string $file_path = ''<br>string $mime_type = null                                             | Output the header in the web browser to download the file and initiate the file download. |
+|                 Method | Parameter                                                                            | Description                                                                               |
+|-----------------------:|:-------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------|
+|             **read()** | bool $echo = false<br>bool $force = false                                            | Create a list of IP addresses. If already created, cache it for one day.                  |
+|           **delete()** | none                                                                                 | Delete the IP address added with the read method.                                         |
+|  **ipListEndPoints()** | none                                                                                 | Wrapper method for the constant IP_LIST_ENDPOINTS.                                        |
+| **getCIDRRangeIPv4()** | int $range = 0                                                                       | Calculate CIDR.                                                                           |
+|           **is_cli()** | none                                                                                 | Check if the type of interface between the web server and PHP is CLI.                     |
+| **curl_get_content()** | string $url = ''<br>array $header = []<br>string $method = 'GET'<br>array $data = [] | Retrieve the HTTP code and content of the specified URL.                                  |
+|         **download()** | string $file_path = ''<br>string $mime_type = null                                   | Output the header in the web browser to download the file and initiate the file download. |
 
 ## Basic markup
 
 What follows is the simplest coding.
 
+### Example 1
 ```php
 <?php
-require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'src/GeoIPAllow.php';
+namespace exampleproject;
+
+use kaleidpixel\GeoIPAllow;
+
+class JPIPAllow {
+	/**
+	 * @var GeoIPAllow
+	 * @since 1.0.0
+	 */
+	protected $geoIpAllow = null;
+
+	public function __construct( array $setting = [] ) {
+		$setting['country'] = 'JP';
+
+		if ( empty( $setting['output_path'] ) ) {
+			$setting['output_path'] = dirname( __DIR__ ) . DIRECTORY_SEPARATOR . '.htaccess';
+		}
+
+		$this->geoIpAllow = new GeoIPAllow( $setting );
+	}
+
+	/**
+	 * @param bool $echo
+	 * @param bool $force
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function read( bool $echo = false, bool $force = false ): void {
+		$this->geoIpAllow->read( $echo, $force );
+	}
+}
+```
+
+### Example 2
+```php
+<?php
+require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 use kaleidpixel\GeoIPAllow;
 
@@ -50,14 +88,13 @@ EOL;
 $ip = new GeoIPAllow(
 	[
 		'server'         => 'apache',
-		'country'        => 'US',
+		'country'        => 'JP',
 		'output_path'    => __DIR__ . DIRECTORY_SEPARATOR . '.htaccess',
 		'add_before_str' => $before_str
 	]
 );
 
 $ip->read(true);
-
 ```
 
 The source code shown above will work on the built-in web server. It also operates in CLI, so choose whichever you
