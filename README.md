@@ -44,7 +44,6 @@ use kaleidpixel\GeoIPAllow;
 class JPIPAllow {
 	/**
 	 * @var GeoIPAllow
-	 * @since 1.0.0
 	 */
 	protected $geoIpAllow = null;
 
@@ -63,12 +62,12 @@ class JPIPAllow {
 	 * @param bool $force
 	 *
 	 * @return void
-	 * @since 1.0.0
 	 */
 	public function read( bool $echo = false, bool $force = false ): void {
 		$this->geoIpAllow->read( $echo, $force );
 	}
 }
+
 ```
 
 ### Example 2
@@ -95,6 +94,7 @@ $ip = new GeoIPAllow(
 );
 
 $ip->read(true);
+
 ```
 
 The source code shown above will work on the built-in web server. It also operates in CLI, so choose whichever you
